@@ -3,8 +3,34 @@
 <head>
     <title>Love Quotes from an Otter</title>
     <style>
-        body { text-align: center; margin-top: 50px; }
-        #quote { font-size: 20px; margin-top: 20px; }
+        body { 
+            text-align: center;
+            margin-top: 50px;
+            background-color: #7BBDD9; /* Christmas blue background color */
+            overflow: hidden; /* Prevent scrolling from snowflakes */
+        }
+        #quote {
+            font-size: 20px; 
+            margin-top: 20px;
+        }
+
+        /* Snowflake styles */
+        @keyframes snowfall {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100vh); }
+        }
+        .snowflake {
+            position: fixed;
+            top: -10px;
+            z-index: 9999;
+            color: #fff;
+            user-select: none;
+            pointer-events: none;
+            animation-name: snowfall;
+            animation-duration: 10s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
     </style>
 </head>
 <body>
@@ -24,7 +50,28 @@
             document.getElementById("quote").innerText = quotes[dayOfYear % quotes.length];
         }
 
-        window.onload = updateQuote;
+        window.onload = function() {
+            updateQuote();
+            createSnowflakes();
+        };
+
+        // Snowflakes
+        function createSnowflakes() {
+            const snowflakeCount = 50; // number of snowflakes
+            for (let i = 0; i < snowflakeCount; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.innerHTML = '&#10052;'; // snowflake symbol
+                snowflake.style.cssText = `
+                    left: ${Math.random() * 100}vw;
+                    font-size: ${Math.random() * 24 + 10}px;
+                    opacity: ${Math.random()};
+                    animation-delay: ${Math.random() * -20}s;
+                    animation-duration: ${Math.random() * 20 + 5}s;
+                `;
+                snowflake.classList.add('snowflake');
+                document.body.appendChild(snowflake);
+            }
+        }
     </script>
 </body>
 </html>
