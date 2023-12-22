@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Love Quotes from an Otter</title>
+    <style>
+        body { text-align: center; margin-top: 50px; }
+        #quote { font-size: 20px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <img id="otterImage" src="otter.png" alt="Cute Otter" width="300">
+    <div id="quote">Love Quote will appear here</div>
+
+    <script>
+        const quotes = [
+            "Love quote 1",
+            "Love quote 2",
+            // Add as many quotes as you like
+        ];
+
+        function updateQuote() {
+            const today = new Date();
+            const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+            document.getElementById("quote").innerText = quotes[dayOfYear % quotes.length];
+        }
+
+        window.onload = updateQuote;
+    </script>
+</body>
+</html>
