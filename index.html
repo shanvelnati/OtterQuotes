@@ -1,77 +1,126 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Love Quotes from an Otter</title>
-    <style>
-        body { 
-            text-align: center;
-            margin-top: 50px;
-            background-color: #7BBDD9; /* Christmas blue background color */
-            overflow: hidden; /* Prevent scrolling from snowflakes */
-        }
-        #quote {
-            font-size: 20px; 
-            margin-top: 20px;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love Quotes from an Otter</title>
+<style>
+  body { 
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background-color: #7BBDD9; /* Christmas blue background color */
+    overflow: hidden; /* Prevent scrolling from snowflakes */
+  }
 
-        /* Snowflake styles */
-        @keyframes snowfall {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(100vh); }
-        }
-        .snowflake {
-            position: fixed;
-            top: -10px;
-            z-index: 9999;
-            color: #fff;
-            user-select: none;
-            pointer-events: none;
-            animation-name: snowfall;
-            animation-duration: 10s;
-            animation-timing-function: linear;
-            animation-iteration-count: infinite;
-        }
-    </style>
+  #quote {
+    font-size: 20px; 
+    margin-top: 20px;
+    color: #FFF; /* Make the text color white for better visibility */
+  }
+
+  /* Carousel styles */
+  .carousel-container {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+    margin: 20px auto;
+  }
+
+  .carousel-track {
+    display: inline-flex;
+  }
+
+  .carousel-image {
+    display: inline-block;
+    max-width: 250px; /* Adjust the width as needed */
+    height: auto;
+    margin-right: 20px;
+  }
+
+  /* Snowflake styles */
+  @keyframes snowfall {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(100vh); }
+  }
+  
+  .snowflake {
+    position: fixed;
+    top: -10px;
+    z-index: 9999;
+    color: #FFF;
+    user-select: none;
+    pointer-events: none;
+    animation-name: snowfall;
+    animation-duration: 10s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+</style>
 </head>
 <body>
-    <img id="otterImage" src="otter.png" alt="Cute Otter" width="300">
-    <div id="quote">Love Quote will appear here</div>
 
-    <script>
-        const quotes = [
-            "Love quote 1",
-            "Love quote 2",
-            // Add as many quotes as you like
-        ];
+<!-- Carousel container -->
+<div class="carousel-container">
+  <div id="carouselTrack" class="carousel-track">
+    <!-- Images will be added by JavaScript -->
+  </div>
+</div>
 
-        function updateQuote() {
-            const today = new Date();
-            const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
-            document.getElementById("quote").innerText = quotes[dayOfYear % quotes.length];
-        }
+<img id="otterImage" src="otter.png" alt="Cute Otter" width="300">
+<div id="quote">Love Quote will appear here</div>
 
-        window.onload = function() {
-            updateQuote();
-            createSnowflakes();
-        };
+<script>
+  // Quotes update code
+  const quotes = [
+    "Love quote 1",
+    "Love quote 2",
+    // Add as many quotes as you like
+  ];
 
-        // Snowflakes
-        function createSnowflakes() {
-            const snowflakeCount = 50; // number of snowflakes
-            for (let i = 0; i < snowflakeCount; i++) {
-                const snowflake = document.createElement('div');
-                snowflake.innerHTML = '&#10052;'; // snowflake symbol
-                snowflake.style.cssText = `
-                    left: ${Math.random() * 100}vw;
-                    font-size: ${Math.random() * 24 + 10}px;
-                    opacity: ${Math.random()};
-                    animation-delay: ${Math.random() * -20}s;
-                    animation-duration: ${Math.random() * 20 + 5}s;
-                `;
-                snowflake.classList.add('snowflake');
-                document.body.appendChild(snowflake);
-            }
-        }
-    </script>
+  function updateQuote() {
+    const today = new Date();
+    const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+    document.getElementById("quote").innerText = quotes[dayOfYear % quotes.length];
+  }
+
+  // Carousel code
+  const carouselTrack = document.getElementById('carouselTrack');
+  const imageFolder = 'pics/'; // Your folder path
+  const imageCount = 5; // The number of images in the folder
+  const imageExtension = '.png'; // The file extension for your images
+
+  for (let i = 1; i <= imageCount; i++) {
+    const imgSrc = `${imageFolder}image${i}${imageExtension}`;
+    const imgElement = document.createElement('img');
+    imgElement.src = imgSrc;
+    imgElement.classList.add('carousel-image');
+    carouselTrack.appendChild(imgElement);
+  }
+  
+  // Snowflakes code
+  function createSnowflakes() {
+    const snowflakeCount = 50; // number of snowflakes
+    for (let i = 0; i < snowflakeCount; i++) {
+      const snowflake = document.createElement('div');
+      snowflake.innerHTML = '&#10052;'; // snowflake symbol
+      snowflake.style.cssText = `
+        left: ${Math.random() * 100}vw;
+        font-size: ${Math.random() * 24 + 10}px;
+        opacity: ${Math.random()};
+        animation-delay: ${Math.random() * -20}s;
+        animation-duration: ${Math.random() * 20 + 5}s;
+      `;
+      snowflake.classList.add('snowflake');
+      document.body.appendChild(snowflake);
+    }
+  }
+
+  window.onload = function() {
+    updateQuote();
+    createSnowflakes();
+  };
+</script>
+
 </body>
 </html>
