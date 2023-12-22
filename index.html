@@ -67,7 +67,7 @@
   </div>
 </div>
 
-<img id="otterImage" src="otter.png" alt="Cute Otter" width="300">
+<img id="otterImage" src="pics/otter.png" alt="Cute Otter" width="300">
 <div id="quote">Love Quote will appear here</div>
 
 <script>
@@ -86,17 +86,15 @@
 
   // Carousel code
   const carouselTrack = document.getElementById('carouselTrack');
+  const imageNames = ['pics/otter.png', 'pics/otter.png', 'pics/otter.png', 'pics/otter.png', 'pics/otter.png']; // The names of the images
   const imageFolder = 'pics/'; // Your folder path
-  const imageCount = 5; // The number of images in the folder
-  const imageExtension = '.png'; // The file extension for your images
 
-  for (let i = 1; i <= imageCount; i++) {
-    const imgSrc = `${imageFolder}image${i}${imageExtension}`;
+  imageNames.forEach(name => {
     const imgElement = document.createElement('img');
-    imgElement.src = imgSrc;
+    imgElement.src = `${imageFolder}${name}`;
     imgElement.classList.add('carousel-image');
     carouselTrack.appendChild(imgElement);
-  }
+  });
   
   // Snowflakes code
   function createSnowflakes() {
